@@ -66,6 +66,7 @@ def parse_avito(fp):
     data["to_yandex"] = None
     data["status"] = "Активное"
     data["source_from"] = "avito"
+    data["kapremont_date"] = None
 
     try:
         val, _ = data["zhilaya_ploshchad"].split()

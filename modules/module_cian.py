@@ -78,5 +78,6 @@ def parse_cian(fp):
     data["to_yandex"] = None
     data["status"] = "Активное"
     data["source_from"] = "cian"
+    data["kapremont_date"] = None
 
     return data
