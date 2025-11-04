@@ -1,4 +1,4 @@
-from modules.utils import get_raw_files
+from modules.utils import get_raw_files, get_file_size
 from modules.module_avito import parse_avito
 from modules.module_cian import parse_cian
 from modules.module_sqlite import (
@@ -16,9 +16,13 @@ def main():
     for file in get_raw_files():
         with open(f"{os.environ.get('AVITO_PATH_FILES')}/{file}") as fp:
             if file.startswith("avito"):
-                data = parse_avito(fp)
+                data = parse_avito(fp, file, fnew=False)
             elif file.startswith("cian"):
-                data = parse_cian(fp)
+                # data = parse_cian(fp)
+                pass
+            elif file.startswith("new"):
+                if get_file_size():
+                    data = parse_avito(fp, file, fnew=True)
             else:
                 print(f"Неправильное название файла - {file}")
                 continue

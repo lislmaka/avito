@@ -1,9 +1,18 @@
 from bs4 import BeautifulSoup
+
 # import datetime
-from .utils import trans_ru_en
+from .utils import (
+    trans_ru_en,
+    copy_file_to_html_folder,
+    create_images_dir,
+    download_image,
+    get_file_size,
+)
 
 
-def parse_avito(fp):
+def parse_avito(fp, file, fnew=False):
+    # print(file)
+    # get_file_size()
     data = {}
     soup = BeautifulSoup(fp, "html.parser")
 
@@ -21,6 +30,13 @@ def parse_avito(fp):
     price = soup.find("meta", property="product:price:amount")
     data["price"] = price["content"]
 
+    if fnew:
+        span_img = soup.find("div", class_="image-frame__wrapper___XzcwYj")
+        img = span_img.find("img")
+        copy_file_to_html_folder(data["id"], "avito")
+        create_images_dir(data["id"])
+        download_image(url=img["src"], id=data["id"])
+
     try:
         address = soup.find("span", class_="style__item-address__string___XzQ5MT")
         data["address"] = address.text
@@ -31,6 +47,12 @@ def parse_avito(fp):
         except Exception:
             data["address"] = None
 
+    try:
+        district = soup.find("span", class_="style__item-address-georeferences-item___XzQ5MT")
+        _, district = district.text.split()
+        data["district"] = district
+    except Exception:
+        data["district"] = None
     # try:
     #     data["seller"] = soup.find(attrs={"data-marker": "seller-info/name"}).text
     # except Exception:
@@ -54,6 +76,8 @@ def parse_avito(fp):
     data["etazh_val"] = etazh_val.strip()
     data["etazh_count"] = etazh_count.strip()
 
+    data["tip_doma"] = data["tip_doma"].lower()
+
     data["to_magazin"] = None
     data["to_pyaterochka"] = None
     data["to_magnit"] = None
@@ -64,9 +88,31 @@ def parse_avito(fp):
     data["to_ozon"] = None
     data["to_wildberries"] = None
     data["to_yandex"] = None
-    data["status"] = "Активное"
-    data["source_from"] = "avito"
     data["kapremont_date"] = None
+    data["rating"] = None
+    data["description"] = None
+    data["description_minus"] = None
+    data["rating_infrastructure"] = None
+    data["rating_house"] = None
+    data["rating_flat"] = None
+    data["rating_all"] = None
+    data["review_results"] = 1
+
+    data["is_kapremont"] = None
+    data["is_no_stupenki"] = None
+    data["is_musoroprovod"] = None
+    data["is_new_lift"] = None
+
+    data["is_kuxnya"] = None
+    data["is_tualet"] = None
+    data["is_vana"] = None
+    data["is_balkon"] = None
+
+    data["record_status"] = 1
+
+    data["status"] = 1
+    data["source_from"] = "avito"
+    
 
     try:
         val, _ = data["zhilaya_ploshchad"].split()

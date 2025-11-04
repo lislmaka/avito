@@ -49,7 +49,8 @@ def sqlite3_add_new_values(my_dict):
     cursor = connection.cursor()
 
     if not sqlite3_check_if_exist(my_dict["id"]):
-        del my_dict['date_update']
+        if "date_update" in my_dict:
+            del my_dict["date_update"]
         my_dict["date_add"] = datetime.date.today().strftime("%d%m%Y")
         columns = ", ".join(my_dict.keys())
         placeholders = ", ".join("?" * len(my_dict))
@@ -59,9 +60,14 @@ def sqlite3_add_new_values(my_dict):
         connection.commit()
         status = "insert"
     else:
-        del my_dict['date_add']
+        if "date_add" in my_dict:
+            del my_dict["date_add"]
+        if "status" in my_dict:
+            del my_dict["status"]
+            
         my_dict["date_update"] = datetime.date.today().strftime("%d%m%Y")
-        columns = ', '.join([f"{k} = ?" for k in my_dict.keys()])
+        my_dict = {k: v for k, v in my_dict.items() if v}
+        columns = ", ".join([f"{k} = ?" for k in my_dict.keys()])
         values = list(my_dict.values())
         values.append(my_dict["id"])
         sql = f"UPDATE avito SET {columns} WHERE id = ?"

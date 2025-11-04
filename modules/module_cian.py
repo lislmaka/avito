@@ -76,8 +76,12 @@ def parse_cian(fp):
     data["to_ozon"] = None
     data["to_wildberries"] = None
     data["to_yandex"] = None
-    data["status"] = "Активное"
-    data["source_from"] = "cian"
     data["kapremont_date"] = None
+    data["rating"] = None
+    data["description"] = None
+    data["description_minus"] = None
+    
+    data["status"] = 1
+    data["source_from"] = "cian"
 
     return data

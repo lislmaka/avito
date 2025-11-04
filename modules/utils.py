@@ -1,12 +1,39 @@
 import os
+import shutil
+import requests
+
+
+def get_file_size():
+    f_size = os.path.getsize("html/new.txt")
+    return f_size
+
+
+def copy_file_to_html_folder(id, web_source):
+    shutil.copy("html/new.txt", f"html/{web_source}_{id}.html")
+    open('html/new.txt', 'w').close()
+
+def create_images_dir(id):
+    path = os.environ.get("FILE_FOLDER_IMAGES") + f"/{id}"
+    if not os.path.isdir(path):
+        os.makedirs(path)
+
+
+def download_image(url, id):
+    path = os.environ.get("FILE_FOLDER_IMAGES") + f"/{id}/" + "main.jpg"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
+    }
+    response = requests.get(url=url, headers=headers)
+    f = open(path, "wb")
+    f.write(response.content)
+    f.close()
 
 
 def fields_dict():
-    data = {
-        
-    }
+    data = {}
 
     return data
+
 
 def get_raw_files():
     """Получение списка файлов"""
