@@ -7,8 +7,8 @@ from .module_sqlite import sqlite3_get_fields_names
 
 
 def parse_cian(fp, file, fnew=False):
-    print(file)
-    # get_file_size()
+    # print(file)
+    # # get_file_size()
     data = {}
     soup = BeautifulSoup(fp, "html.parser")
 
