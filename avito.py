@@ -7,22 +7,28 @@ from modules.module_sqlite import (
     sqlite3_add_new_values,
 )
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-def main():
+def main(site_name=None):
     for file in get_raw_files():
         with open(f"{os.environ.get('AVITO_PATH_FILES')}/{file}") as fp:
             if file.startswith("avito"):
                 data = parse_avito(fp, file, fnew=False)
             elif file.startswith("cian"):
-                # data = parse_cian(fp)
+                data = parse_cian(fp, file, fnew=False)
                 pass
             elif file.startswith("new"):
                 if get_file_size():
-                    data = parse_avito(fp, file, fnew=True)
+                    if site_name == "avito":
+                        data = parse_avito(fp, file, fnew=True)
+                    elif site_name == "cian":
+                        data = parse_cian(fp, file, fnew=True)
+                    else:
+                        pass
             else:
                 print(f"Неправильное название файла - {file}")
                 continue
@@ -36,4 +42,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    site_name = None
+    if len(sys.argv) == 2:
+        site_name = sys.argv[1]
+    main(site_name)

@@ -1,12 +1,14 @@
 from bs4 import BeautifulSoup
 # import datetime
-from .utils import trans_ru_en
+from .utils import copy_file_to_html_folder, create_images_dir, download_image, trans_ru_en
 import re
 from .utils import fields_dict
 from .module_sqlite import sqlite3_get_fields_names
 
 
-def parse_cian(fp):
+def parse_cian(fp, file, fnew=False):
+    print(file)
+    # get_file_size()
     data = {}
     soup = BeautifulSoup(fp, "html.parser")
 
@@ -60,11 +62,21 @@ def parse_cian(fp):
         else:
             data[f_key] = f_value
 
+    if fnew:
+        span_img = soup.find("div", attrs={"data-name": "GalleryInnerComponent"})
+        img = span_img.find("img")
+        print(img["src"])
+        copy_file_to_html_folder(data["id"], "cian")
+        create_images_dir(data["id"])
+        download_image(url=img["src"], id=data["id"])
+        
     data["obshchaya_ploshchad"] = re.sub(r"[^\d\,]", "", data["obshchaya_ploshchad"]).replace(",", ".")
     data["ploshchad_kukhni"] = re.sub(r"[^\d\,]", "", data["ploshchad_kukhni"]).replace(",", ".")
     data["zhilaya_ploshchad"] = re.sub(r"[^\d\,]", "", data["zhilaya_ploshchad"]).replace(",", ".")
     # print(data)
     # exit()
+
+    data["tip_doma"] = data["tip_doma"].lower()
 
     data["to_magazin"] = None
     data["to_pyaterochka"] = None
@@ -80,7 +92,24 @@ def parse_cian(fp):
     data["rating"] = None
     data["description"] = None
     data["description_minus"] = None
-    
+    data["rating_infrastructure"] = None
+    data["rating_house"] = None
+    data["rating_flat"] = None
+    data["rating_all"] = None
+    data["review_results"] = 1
+
+    data["is_kapremont"] = None
+    data["is_no_stupenki"] = None
+    data["is_musoroprovod"] = None
+    data["is_new_lift"] = None
+
+    data["is_kuxnya"] = None
+    data["is_tualet"] = None
+    data["is_vana"] = None
+    data["is_balkon"] = None
+
+    data["record_status"] = 1
+
     data["status"] = 1
     data["source_from"] = "cian"
 

@@ -11,7 +11,7 @@ from .utils import (
 
 
 def parse_avito(fp, file, fnew=False):
-    # print(file)
+    print(file)
     # get_file_size()
     data = {}
     soup = BeautifulSoup(fp, "html.parser")

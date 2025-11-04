@@ -11,7 +11,7 @@ cd /home/home/my/RepoCode/avito/parser
 echo "$PWD"
 pipenv install
 pipenv --venv
-pipenv run python3 avito.py
+pipenv run python3 avito.py avito
 # cd /home/home/my/RepoCode/avito/backend
 
 docker exec -it avito-service.backend-1 pipenv run python manage.py collectstatic --noinput
