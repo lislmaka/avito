@@ -91,6 +91,7 @@ def parse_avito(fp, file, fnew=False):
     data["kapremont_date"] = None
     data["kapremont_diff"] = None
     data["lift_date"] = None
+    data["lift_diff"] = None
     data["rating"] = None
     data["description"] = None
     data["description_minus"] = None
