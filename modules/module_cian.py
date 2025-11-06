@@ -110,9 +110,25 @@ def parse_cian(fp, file, fnew=False):
     data["is_tualet"] = None
     data["is_vana"] = None
     data["is_balkon"] = None
+    data["is_neighbors_around"] = None
+    data["is_neighbors_top"] = None
+    data["is_door"] = None
 
     data["record_status"] = 1
 
+    data["door"] = None
+    data["kuxnya"] = None
+    data["tualet"] = None
+    data["vana"] = None
+    data["balkon"] = None
+    data["to_bus_stop"] = None
+    data["gkx_payments"] = None
+    data["neighbors_around"] = None
+    data["neighbors_top"] = None
+    data["tambur"] = None
+    data["no_stupenki"] = None
+    data["musoroprovod"] = None
+    
     data["status"] = 1
     data["source_from"] = "cian"
 

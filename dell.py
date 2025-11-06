@@ -1,36 +1,14 @@
-        rls = []
+import math
 
-        # Есть ли рядом магазин
-        distance = 500
-        flag_magazin = False
-        if flat.to_magazin and int(flat.to_magazin) <= distance:
-            flag_magazin = True
-        if flat.to_pyaterochka and int(flat.to_pyaterochka) <= distance:
-            flag_magazin = True
-        if flat.to_magnit and int(flat.to_magnit) <= distance:
-            flag_magazin = True
+def formula_morma(value):
+    return 1/(1 + math.pow(math.e, 1/value))
 
-        if flag_magazin:
-            rls.append(1)
-        else:
-            rls.append(0)
+def formula_morma2(value, mmin, mmax):
+    return (value - mmin) / (mmax - mmin)
 
-        # Есть ли рядом аптека
-        if flat.to_apteka and int(flat.to_apteka) <= distance:
-            rls.append(1)
-        else:
-            rls.append(0)
+l = [1981, 1978, 2000, 2011, 1995]
 
-        # Есть ли рядом какой-то пункт выдачи товаров
-        flag_delivery = False
-        if flat.to_ozon and int(flat.to_ozon) <= distance:
-            flag_delivery = True
-        if flat.to_wildberries and int(flat.to_wildberries) <= distance:
-            flag_delivery = True
-        if flat.to_yandex and int(flat.to_yandex) <= distance:
-            flag_delivery = True
-
-        if flag_delivery:
-            rls.append(1)
-        else:
-            rls.append(0)
+print(math.e)
+for i in l:
+    r = formula_morma2(i, 1970, 2020)
+    print(f"{i} = {r}, {round(1 - r, 2)}")
