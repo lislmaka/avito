@@ -130,6 +130,9 @@ def parse_avito(fp, file, fnew=False):
 
     data["status"] = 1
     data["source_from"] = "avito"
+
+    data["file_img"] = None
+    data["file_video"] = None
     
 
     try:

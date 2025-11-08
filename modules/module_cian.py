@@ -132,4 +132,7 @@ def parse_cian(fp, file, fnew=False):
     data["status"] = 1
     data["source_from"] = "cian"
 
+    data["file_img"] = None
+    data["file_video"] = None
+    
     return data
