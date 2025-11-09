@@ -76,8 +76,11 @@ def parse_cian(fp, file, fnew=False):
     # print(data)
     # exit()
 
-    data["tip_doma"] = data["tip_doma"].lower()
-
+    if "tip_doma" in data:
+        data["tip_doma"] = data["tip_doma"].lower()
+    else:
+        data["tip_doma"] = None
+        
     data["to_magazin"] = None
     data["to_pyaterochka"] = None
     data["to_magnit"] = None
