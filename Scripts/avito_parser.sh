@@ -13,7 +13,7 @@ if [ -s $PATH_TO_FILE ]; then
     pipenv --venv
     pipenv run python3 avito.py avito
 
-    docker exec -it avito-service.backend-1 pipenv run python manage.py collectstatic --noinput
+    # docker exec -it avito-service.backend-1 pipenv run python manage.py collectstatic --noinput
 
     read -p "Press enter to continue"
 else

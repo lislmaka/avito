@@ -78,6 +78,15 @@ def parse_avito(fp, file, fnew=False):
 
     data["tip_doma"] = data["tip_doma"].lower()
 
+    if "v_dome" in data and "мусоропровод" in data["v_dome"]:
+        data["is_musoroprovod"] = "1"
+        data["musoroprovod"] = "2"
+    else:
+        data["is_musoroprovod"] = None
+        data["musoroprovod"] = None
+
+    data["plita"] = None
+
     data["to_magazin"] = None
     data["to_pyaterochka"] = None
     data["to_magnit"] = None
@@ -112,11 +121,11 @@ def parse_avito(fp, file, fnew=False):
     data["neighbors_top"] = None
     data["tambur"] = None
     data["no_stupenki"] = None
-    data["musoroprovod"] = None
+    # data["musoroprovod"] = None
 
     data["is_kapremont"] = None
     data["is_no_stupenki"] = None
-    data["is_musoroprovod"] = None
+    # data["is_musoroprovod"] = None
     data["is_new_lift"] = None
 
     data["is_kuxnya"] = None
@@ -127,6 +136,7 @@ def parse_avito(fp, file, fnew=False):
     data["is_neighbors_top"] = None
     data["is_door"] = None
     data["record_status"] = 1
+    data["user"] = None
 
     data["status"] = 1
     data["source_from"] = "avito"

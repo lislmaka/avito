@@ -71,16 +71,24 @@ def parse_cian(fp, file, fnew=False):
         download_image(url=img["src"], id=data["id"])
         
     data["obshchaya_ploshchad"] = re.sub(r"[^\d\,]", "", data["obshchaya_ploshchad"]).replace(",", ".")
-    data["ploshchad_kukhni"] = re.sub(r"[^\d\,]", "", data["ploshchad_kukhni"]).replace(",", ".")
-    data["zhilaya_ploshchad"] = re.sub(r"[^\d\,]", "", data["zhilaya_ploshchad"]).replace(",", ".")
-    # print(data)
-    # exit()
+    
+    try:
+        data["ploshchad_kukhni"] = re.sub(r"[^\d\,]", "", data["ploshchad_kukhni"]).replace(",", ".")
+    except Exception:
+        data["ploshchad_kukhni"] = None
+    try:
+        data["zhilaya_ploshchad"] = re.sub(r"[^\d\,]", "", data["zhilaya_ploshchad"]).replace(",", ".")
+    except Exception:
+        data["zhilaya_ploshchad"] = None
 
     if "tip_doma" in data:
         data["tip_doma"] = data["tip_doma"].lower()
     else:
         data["tip_doma"] = None
-        
+
+    data["plita"] = None
+    
+    data["district"] = None
     data["to_magazin"] = None
     data["to_pyaterochka"] = None
     data["to_magnit"] = None
@@ -117,6 +125,7 @@ def parse_cian(fp, file, fnew=False):
     data["is_neighbors_top"] = None
     data["is_door"] = None
 
+    data["user"] = None
     data["record_status"] = 1
 
     data["door"] = None
