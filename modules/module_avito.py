@@ -85,6 +85,14 @@ def parse_avito(fp, file, fnew=False):
         data["is_musoroprovod"] = None
         data["musoroprovod"] = None
 
+    if "zaplanirovan_snos" in data and data["zaplanirovan_snos"]:
+        if data["zaplanirovan_snos"] == "да":
+            data["zaplanirovan_snos"] = "1"
+        else:
+            data["zaplanirovan_snos"] = "2"
+    else:
+        data["zaplanirovan_snos"] = "3"       
+         
     data["plita"] = None
 
     data["to_magazin"] = None

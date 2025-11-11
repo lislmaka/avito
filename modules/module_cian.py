@@ -86,6 +86,14 @@ def parse_cian(fp, file, fnew=False):
     else:
         data["tip_doma"] = None
 
+    if "zaplanirovan_snos" in data and data["zaplanirovan_snos"]:
+        if data["zaplanirovan_snos"] == "да":
+            data["zaplanirovan_snos"] = "1"
+        else:
+            data["zaplanirovan_snos"] = "2"
+    else:
+        data["zaplanirovan_snos"] = "3"   
+        
     data["plita"] = None
     
     data["district"] = None
