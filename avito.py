@@ -32,7 +32,6 @@ def parse_one(site_name):
             data = parse_cian(fp, file, fnew=True)
         else:
             pass
-
         sqlite_insert_update(data, file)
 
 def parse_many():

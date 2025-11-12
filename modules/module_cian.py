@@ -18,8 +18,11 @@ def parse_cian(fp, file, fnew=False):
     title = soup.find("meta", property="og:title")
     data["title"] = title["content"]
 
-    address = soup.find("meta", property="og:description")
-    data["address"] = address["content"]
+    # address = soup.find("meta", property="og:description")
+    # data["address"] = address["content"]
+
+    address = soup.find("div", attrs={"data-name": "AddressContainer"})
+    data["address"] = address.text.replace("На карте", "")
 
     url = soup.find("meta", property="og:url")
     data["url"] = url["content"]
@@ -65,7 +68,7 @@ def parse_cian(fp, file, fnew=False):
     if fnew:
         span_img = soup.find("div", attrs={"data-name": "GalleryInnerComponent"})
         img = span_img.find("img")
-        print(img["src"])
+        # print(img["src"])
         copy_file_to_html_folder(data["id"], "cian")
         create_images_dir(data["id"])
         download_image(url=img["src"], id=data["id"])
