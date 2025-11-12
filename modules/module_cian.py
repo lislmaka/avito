@@ -65,6 +65,23 @@ def parse_cian(fp, file, fnew=False):
         else:
             data[f_key] = f_value
 
+    # 
+    sposob_prodazhi = ""
+    data["sposob_prodazhi"] = "не указано"
+    params2 = soup.find_all("div", attrs={"data-name": "OfferFactItem"})
+    for pa in params2:
+        # print(pa.text)
+        if "свободная продажа" in pa.text:
+            sposob_prodazhi = "свободная"
+            break
+        if "альтернатива" in pa.text:
+            sposob_prodazhi = "альтернативная"
+            break
+    if sposob_prodazhi:
+        data["sposob_prodazhi"] = sposob_prodazhi
+    # print(data["sposob_prodazhi"])
+    # exit()
+    # 
     if fnew:
         span_img = soup.find("div", attrs={"data-name": "GalleryInnerComponent"})
         img = span_img.find("img")
@@ -137,6 +154,7 @@ def parse_cian(fp, file, fnew=False):
     data["is_door"] = None
 
     data["user"] = None
+    # for reimport set None else 1
     data["record_status"] = 1
 
     data["door"] = None

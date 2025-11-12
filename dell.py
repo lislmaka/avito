@@ -1,5 +1,5 @@
-import datetime
+import modules.utils as utils
 
+st = "Способ продажи"
 
-d = datetime.datetime.now().strftime("%Y-%d-%m %H:%M")
-print(d)
+print(utils.trans_ru_en(st.lower()))

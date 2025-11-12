@@ -51,7 +51,7 @@ def sqlite3_add_new_values(my_dict):
     if not sqlite3_check_if_exist(my_dict["id"]):
         if "date_update" in my_dict:
             del my_dict["date_update"]
-        my_dict["date_add"] = datetime.datetime.now().strftime("%Y-%d-%m %H:%M")
+        my_dict["date_add"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
         columns = ", ".join(my_dict.keys())
         placeholders = ", ".join("?" * len(my_dict))
         sql = "INSERT INTO avito ({}) VALUES ({})".format(columns, placeholders)
@@ -65,7 +65,7 @@ def sqlite3_add_new_values(my_dict):
         if "status" in my_dict:
             del my_dict["status"]
             
-        my_dict["date_update"] = datetime.datetime.now().strftime("%Y-%d-%m %H:%M")
+        my_dict["date_update"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
         my_dict = {k: v for k, v in my_dict.items() if v}
         columns = ", ".join([f"{k} = ?" for k in my_dict.keys()])
         values = list(my_dict.values())

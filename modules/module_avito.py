@@ -66,6 +66,7 @@ def parse_avito(fp, file, fnew=False):
             k, v = p.text.split(":")
             data[trans_ru_en(k.strip())] = v.strip()
 
+       
     val, _ = data["obshchaya_ploshchad"].split()
     data["obshchaya_ploshchad"] = val
 
@@ -143,6 +144,7 @@ def parse_avito(fp, file, fnew=False):
     data["is_neighbors_around"] = None
     data["is_neighbors_top"] = None
     data["is_door"] = None
+    # for reimport set None else 1
     data["record_status"] = 1
     data["user"] = None
 
