@@ -152,6 +152,8 @@ def parse_avito(fp, file, fnew=False):
     data["file_img"] = None
     data["file_video"] = None
     
+    data["copy_from"] = None
+    data["copy_from_done"] = None
 
     try:
         val, _ = data["zhilaya_ploshchad"].split()
