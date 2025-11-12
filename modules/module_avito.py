@@ -155,6 +155,9 @@ def parse_avito(fp, file, fnew=False):
     data["copy_from"] = None
     data["copy_from_done"] = None
 
+    data["dublicat_id"] = None
+    data["dublicat_status"] = 2
+
     try:
         val, _ = data["zhilaya_ploshchad"].split()
         data["zhilaya_ploshchad"] = val

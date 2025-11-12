@@ -161,4 +161,7 @@ def parse_cian(fp, file, fnew=False):
     data["copy_from"] = None
     data["copy_from_done"] = None
 
+    data["dublicat_id"] = None
+    data["dublicat_status"] = 2
+    
     return data
